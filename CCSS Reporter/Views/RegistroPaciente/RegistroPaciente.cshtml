@@ -1,0 +1,104 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model Paciente
+
+    <section class="center-block">
+
+        <form id="FormProfesional">
+        {
+            <section class="mb-3 mt-3">
+                <label for="Identificacion" class="form-label">Identificacion</label>
+                <input type="text" id="Identificacion" class="form-control" required name="Identificacion" onkeyup="FillForm()" onchange="FillForm()" value="@Model.Identificacion" placeholder="Ingrese la identificacion del paciente">
+
+            </section>
+
+            <section class="mb-3">
+                <label for="Nombre" class="form-label">Nombre</label>
+                <input type="text" id="Nombre" required class="form-control" name="Nombre" onkeyup="FillForm()" onchange="FillForm()" value="@Model.Nombre" placeholder="Ingrese el nombre del paciente">
+            </section>
+
+            <section class="mb-3">
+                <label for="PrimerApellido" class="form-label">Primer apellido</label>
+                <input type="text" id="PrimerApellido" required class="form-control" name="PrimerApellido" onkeyup="FillForm()" onchange="FillForm()" value="@Model.PrimerApellido" placeholder="Ingrese el primer apellido">
+            </section>
+
+            <section class="mb-3">
+                <label for="SegundoApellido" class="form-label">Segundo apellido</label>
+                <input type="text" id="SegundoApellido" required class="form-control" name="SegundoApellido" onkeyup="FillForm()" onchange="FillForm()" value="@Model.SegundoApellido" placeholder="Ingrese el segundo apellido">
+            </section>
+
+
+            <section class="mb-3">
+                <label for="FechaNacimiento" class="form-label">Fecha de nacimiento</label>
+                <input type="text" id="FechaNacimiento" required class="form-control" name="FechaNacimiento" onkeyup="FillForm()" onchange="FillForm()" value="@Model.FechaNacimiento" placeholder="Fecha de nacimiento del paciente">
+            </section>
+
+            <section class="mb-3">
+                <label for="Genero" class="form-label">Genero</label>
+                <select id="Genero" required name="Genero" class="form-control" onkeyup="FillForm()" onchange="FillForm()" value="@Model.Genero">
+                <option selected value="">--Genero del paciente--</option>
+                <option value="M">Masculino</option>
+                <option value="F">Femenino</option>
+                </select>
+            </section>
+
+            <section class="mb-3">
+                <label for="NumeroContacto" class="form-label">Contacto</label>
+                <input type="tel" id="NumeroContacto" required class="form-control" name="NumeroContacto" onkeyup="FillForm()" onchange="FillForm()" value="@Model.NumeroContacto" placeholder=" indique un numero de telefono o celular">
+            </section>
+
+            <section class="mb-3">
+                <label for="Pais" class="form-label">Pais</label>
+                <input type="text" id="Pais" required class="form-control" name="Pais1" value="@Model.Pais" onkeyup="FillForm()" onchange="FillForm()" placeholder="Indique la nacionalidad del paciente">
+            </section>
+
+            <section class="mb-3">
+                <label for="ProvinciaOestado" class="form-label">Estado o provincia</label>
+                <input type="text" id="ProvinciaOestado" required class="form-control" name="ProvinciaOestado" value="@Model.ProvinciaOestado" onkeyup="FillForm()" onchange="FillForm()" placeholder="Indique el estado o la provincia del paciente">
+            </section>
+
+            <section class="mb-3">
+                <label for="Distrito" class="form-label">Distrito</label>
+                <input type="text" id="Distrito" required class="form-control" name="Distrito" onkeyup="FillForm()" onchange="FillForm()" value="@Model.Distrito" placeholder="Indique el distrito del paciente">
+            </section>
+
+            <section class="mb-3">
+                <label for="Habita" class="form-label">Habita en (opcional)</label>
+                <input type="text" id="Habita" class="form-control" name="Habita" onkeyup="FillForm()" onchange="FillForm()" value="@Model.Distrito" placeholder="Indique donde habita el paciente">
+            </section>
+
+            <section class="mb-3">
+                <label for="EstadoCivil" class="form-label">EstadoCivil</label>
+                <select id="EstadoCivil" class="form-control" required name="EstadoCivil" onkeyup="FillForm()" onchange="FillForm()" value="@Model.EstadoCivil">
+                    <option selected value="">--Estado civil del paciente--</option>
+                    <option value="S">Soltero(a)</option>
+                    <option value="C">Casado(a)</option>
+                    <option value="D">Divorciado(a)</option>
+                    <option value="V">Viudo(a)</option>
+                </select>
+            </section>
+
+            <section class="mb-3">
+                <label for="CorreoElectronico" class="form-label">Correo</label>
+                <input type="email" required id="CorreoElectronico" pattern="[a-z0-9._%+-]+@@[a-z0-9.-]+\.[a-z]{2,}$" onkeyup="FillForm()" onchange="FillForm()" class="form-control" name="CorreoElectronico" value="@Model.CorreoElectronico" placeholder="Ingrese una direccion de correo electronico del paciente">
+            </section>
+
+             <section class="mb-3">
+                <label for="FechaRegistro" class="form-label">Fecha de registro</label>
+                <input type="date" id="FechaRegistro" required class="form-control" name="FechaRegistro" onkeyup="FillForm()" onchange="FillForm()" value="@Model.FechaRegistro">
+            </section>
+
+            <section class="mb-3">
+                <label for="Ocupacion" class="form-label">Ocupacion</label>
+                <input type="text" id="Ocupacion" required class="form-control" name="Ocupacion" onkeyup="FillForm()" onchange="FillForm()" value="@Model.Ocupacion" placeholder="Indique la ocupacion del paciente">
+            </section>
+
+            <input type="submit" onclick="validForm()" class="btn btn-primary" disabled="true" id="btnSave" value="Guardar">
+
+
+        </form>
+
+    </section>
+}

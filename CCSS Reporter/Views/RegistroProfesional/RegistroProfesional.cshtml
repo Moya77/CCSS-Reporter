@@ -1,0 +1,57 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+*@
+@{
+ 
+
+    @model Profesional
+
+    <section class="center-block">
+
+        <form id="FormProfesional">
+        {
+            <section class="mb-3 mt-3">
+                <label for="Identificacion" class="form-label">Identificacion</label>
+                <input type="text" id="Identificacion" class="form-control" required name="Identificacion1" onkeyup="FillForm()" onchange="FillForm()" value="@Model.Identificacion1" placeholder="Ingrese su identificacion">
+                
+                </section>
+
+            <section class="mb-3">
+                <label for="CodigoProfesional" class="form-label">Código de profesional</label>
+                <input type="text" id="CodigoProfesional" required class="form-control" name="CodigoProfesional1" onkeyup="FillForm()" onchange="FillForm()" value="@Model.CodigoProfesional1" placeholder="Ingrese su codigo de profesional">
+            </section>
+
+            <section class="mb-3">
+                <label for="NombreCompleto" class="form-label">Nombre completo</label>
+                <input type="text" id="NombreCompleto" required class="form-control" name="NombreCompleto1" onkeyup="FillForm()" onchange="FillForm()" value="@Model.NombreCompleto1" placeholder="Ingrese su nombre completo">
+            </section>
+
+            <section class="mb-3">
+                <label for="Correo" class="form-label">Correo</label>
+                <input type="email" required id="Correo" pattern="[a-z0-9._%+-]+@@[a-z0-9.-]+\.[a-z]{2,}$" onkeyup="FillForm()" onchange="FillForm()" class="form-control" name="Correo" value="@Model.Correo" placeholder="Ingrese su direccion de correo">
+                </section>
+
+            <section class="mb-3">
+                <label for="Pais" class="form-label">Pais</label>
+                <input type="text" id="Pais" required class="form-control" name="Pais1" value="@Model.Pais1" onkeyup="FillForm()" onchange="FillForm()" placeholder="Indique su pais">
+            </section>
+
+            <section class="mb-3">
+                <label for="Estado" class="form-label">Estado</label>
+                <input type="text" id="Estado" required class="form-control" name="Estado1" value="@Model.Estado1" onkeyup="FillForm()" onchange="FillForm()" placeholder="Indique su estado">
+            </section>
+
+            <section class="mb-3">
+                <label for="Provincia" class="form-label">Provincia</label>
+                <input type="text" id="Provincia" required class="form-control" name="Provincia1" onkeyup="FillForm()" onchange="FillForm()" value="@Model.Provincia1" placeholder="Indique su provincia">
+             </section>
+
+            <input type="submit" onclick="validForm()" class="btn btn-primary" disabled="true" id="btnSave" value="Guardar">
+
+
+        </form>
+
+    </section>
+
+}

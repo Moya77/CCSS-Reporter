@@ -1,0 +1,38 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.FormEnfermedad {
+    padding-top: 100px;
+    width: 70%;
+    background-color: #f2ffff;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+
+
+.spacereg {
+    width: 100%;
+    display: inline-block;
+}
+
+.spacereg input{
+    width: 50%;
+   align-items:self-end;
+}

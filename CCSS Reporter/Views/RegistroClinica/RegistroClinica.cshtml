@@ -1,0 +1,62 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+*@
+
+
+@{
+    @model Clinica
+
+    <section class="center-block">
+
+        @using (Html.BeginForm("RegistrarClinica", "RegistroClinica", FormMethod.Post, new { id = "FormProfesional" }))
+        {
+            <section class="mb-3 mt-3">
+                <label for="CedulaJuridica" class="form-label">Cedula juridica</label>
+                <input type="text" id="CedulaJuridica" class="form-control" required name="CedulaJuridica1" onkeyup="FillForm()" onchange="FillForm()" value="@Model.CedulaJuridica1" placeholder="Ingrese la cedula juridica de la clinica">
+
+            </section>
+
+            <section class="mb-3">
+                <label for="NombreClinica" class="form-label">Nombre de la clinica</label>
+                <input type="text" id="NombreClinica" required class="form-control" name="NombreClinica1" onkeyup="FillForm()" onchange="FillForm()" value="@Model.NombreClinica1" placeholder="Ingrese el nombre de la clinica">
+            </section>
+
+            <section class="mb-3">
+                <label for="pais" class="form-label">Pais</label>
+                <input type="text" id="pais" required class="form-control" name="Pais" onkeyup="FillForm()" onchange="FillForm()" value="@Model.Pais" placeholder="Pais de ubicacion">
+            </section>
+
+            <section class="mb-3">
+                <label for="provinciaEstado" class="form-label">Provincia o Estado</label>
+                <input type="text" required id="provinciaEstado" onkeyup="FillForm()" onchange="FillForm()" class="form-control" name="ProvinciaEstado" value="@Model.ProvinciaEstado" placeholder="Ingrese la Provincia o estado">
+            </section>
+
+            <section class="mb-3">
+                <label for="distrito" class="form-label">Distrito</label>
+                <input type="text" id="distrito" required class="form-control" name="Distrito" value="@Model.Distrito" onkeyup="FillForm()" onchange="FillForm()" placeholder="Indique su distrito">
+            </section>
+
+            <section class="mb-3">
+                <label for="Telefono" class="form-label">Telefono</label>
+                <input type="text" id="Telefono" required class="form-control" name="Telefono1" value="@Model.Telefono1" onkeyup="FillForm()" onchange="FillForm()" placeholder="Ingrese el numero de telefono de la administracion">
+            </section>
+
+            <section class="mb-3">
+                <label for="Correo" class="form-label">Correo</label>
+                <input type="email" pattern="[a-z0-9._%+-]+@@[a-z0-9.-]+\.[a-z]{2,}$" id="Correo" required class="form-control" name="Correo" onkeyup="FillForm()" onchange="FillForm()" value="@Model.Correo" placeholder="Indique el correo de la administracion">
+            </section>
+
+            <section class="mb-3">
+                <label for="sitioweb" class="form-label">Sitio web</label>
+                <input type="text" pattern="^(https?:\/\/)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/\S*)?$" id="sitioweb" required class="form-control" name="DireccionWeb" onkeyup="FillForm()" onchange="FillForm()" value="@Model.DireccionWeb" placeholder="Indique la direccion web de la clinica">
+            </section>
+
+            <input type="submit" onclick="validForm()" class="btn btn-primary" disabled="true" id="btnSave" value="Guardar">
+            <input type="button" class="btn btn-primary" id="btnSave" value="Saltar">
+
+
+        }
+
+    </section>
+}
