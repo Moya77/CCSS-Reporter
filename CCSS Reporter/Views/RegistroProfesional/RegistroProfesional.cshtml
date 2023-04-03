@@ -3,17 +3,17 @@
 
 *@
 @{
- 
 
     @model Profesional
 
-    <section class="center-block">
+    <section class="center-block paper">
 
-        <form id="FormProfesional">
+        @using (Html.BeginForm("RegistrarProfesional", "RegistroProfesional", FormMethod.Post, new { id = "FormProfesional" }))
         {
+        
             <section class="mb-3 mt-3">
                 <label for="Identificacion" class="form-label">Identificacion</label>
-                <input type="text" id="Identificacion" class="form-control" required name="Identificacion1" onkeyup="FillForm()" onchange="FillForm()" value="@Model.Identificacion1" placeholder="Ingrese su identificacion">
+                <input type="text" id="Identificacion" class="form-control" required name="Identificacion1" onfocusout="buscarProfesional()" onkeyup="FillForm()" onchange="FillForm()" value="@Model.Identificacion1" placeholder="Ingrese su identificacion">
                 
                 </section>
 
@@ -49,8 +49,8 @@
 
             <input type="submit" onclick="validForm()" class="btn btn-primary" disabled="true" id="btnSave" value="Guardar">
 
-
-        </form>
+        }
+        
 
     </section>
 

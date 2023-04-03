@@ -1,0 +1,39 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model Reporte
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset=utf-8 />
+        <title>Editor JavaScript online - www.cubicfactory.com</title>
+    </head>
+    <body style="color: black;">
+        <section style="text-align: center; background-color: aqua;">
+
+            <div id="image" style="width: 30px; height: 30px;">
+                <img width="100" height="95" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.crnova.com%2Fcontent%2Fimages%2Fclients%2Flogo-ccss.png&f=1&nofb=1&ipt=08979d7f5ae90461e79338d5235de9438f6f1e6acafb0b3aab9cf56dc2fb0e83&ipo=images" alt="">
+            </div>
+
+            <h1>Reporte de atencion CCSS Reporter</h1>
+            <h1></h1>
+            <h3>En atencion a: @Model.Paciente.Nombre</h3>
+            <h3>Genero: @Model.Paciente.Genero</h3>
+            <h3>Fecha de nacimiento: @Model.Paciente.FechaNacimiento</h3>
+        </section>
+
+        <section style="text-align: center; background-color: aqua;">
+            <h1>Datos de quien atiende</h1>
+            <h1></h1>
+            <h3>Profesional: @Model.Profesional.NombreCompleto1</h3>
+            <h3>Identificacion: @Model.Profesional.Identificacion1</h3>
+        </section>
+        
+    </body>
+    
+    </html>
+    <footer style="background-color: rgb(207, 231, 253);">
+        <h4 style="float: right; margin-right: 50px;">Fecha del la atención: @Model.fechaAtencion</h4>
+    </footer>
+}

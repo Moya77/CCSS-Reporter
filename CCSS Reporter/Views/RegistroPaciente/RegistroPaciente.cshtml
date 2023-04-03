@@ -4,13 +4,14 @@
 @{
     @model Paciente
 
-    <section class="center-block">
+    <section class="center-block paper">
 
-        <form id="FormProfesional">
+        @using (Html.BeginForm("RegistrarPaciente", "RegistroPaciente", FormMethod.Post, new { id = "FormProfesional" }))
+        
         {
             <section class="mb-3 mt-3">
                 <label for="Identificacion" class="form-label">Identificacion</label>
-                <input type="text" id="Identificacion" class="form-control" required name="Identificacion" onkeyup="FillForm()" onchange="FillForm()" value="@Model.Identificacion" placeholder="Ingrese la identificacion del paciente">
+                <input type="text" id="Identificacion" class="form-control" required name="Identificacion" onfocusout="buscarPaciente()" onkeyup="FillForm()" onchange="FillForm()" value="@Model.Identificacion" placeholder="Ingrese la identificacion del paciente">
 
             </section>
 
@@ -32,7 +33,7 @@
 
             <section class="mb-3">
                 <label for="FechaNacimiento" class="form-label">Fecha de nacimiento</label>
-                <input type="text" id="FechaNacimiento" required class="form-control" name="FechaNacimiento" onkeyup="FillForm()" onchange="FillForm()" value="@Model.FechaNacimiento" placeholder="Fecha de nacimiento del paciente">
+                <input type="date" id="FechaNacimiento" required class="form-control" name="FechaNacimiento" onkeyup="FillForm()" onchange="FillForm()" value="@Model.FechaNacimiento" placeholder="Fecha de nacimiento del paciente">
             </section>
 
             <section class="mb-3">
@@ -51,7 +52,7 @@
 
             <section class="mb-3">
                 <label for="Pais" class="form-label">Pais</label>
-                <input type="text" id="Pais" required class="form-control" name="Pais1" value="@Model.Pais" onkeyup="FillForm()" onchange="FillForm()" placeholder="Indique la nacionalidad del paciente">
+                <input type="text" id="Pais" required class="form-control" name="Pais" value="@Model.Pais" onkeyup="FillForm()" onchange="FillForm()" placeholder="Indique la nacionalidad del paciente">
             </section>
 
             <section class="mb-3">
@@ -66,7 +67,7 @@
 
             <section class="mb-3">
                 <label for="Habita" class="form-label">Habita en (opcional)</label>
-                <input type="text" id="Habita" class="form-control" name="Habita" onkeyup="FillForm()" onchange="FillForm()" value="@Model.Distrito" placeholder="Indique donde habita el paciente">
+                <input type="text" id="Habita" class="form-control" name="Dondehabita" onkeyup="FillForm()" onchange="FillForm()" value="@Model.Dondehabita" placeholder="Indique donde habita el paciente">
             </section>
 
             <section class="mb-3">
@@ -98,7 +99,7 @@
             <input type="submit" onclick="validForm()" class="btn btn-primary" disabled="true" id="btnSave" value="Guardar">
 
 
-        </form>
+        }
 
     </section>
 }

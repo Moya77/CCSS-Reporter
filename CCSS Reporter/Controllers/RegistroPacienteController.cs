@@ -1,86 +1,49 @@
 ﻿using CCSS_Reporter.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace CCSS_Reporter.Controllers
 {
     public class RegistroPacienteController : Controller
     {
-        // GET: RegistroPacienteController
         Paciente paciente = new Paciente();
+
+        private readonly HttpClient _httpClient;
+        private readonly string _apiUrl;
+
+        public RegistroPacienteController(HttpClient httpClient, IConfiguration configuration)
+        {
+
+            _httpClient = httpClient;
+            _apiUrl = configuration.GetValue<string>("APIUrl");
+        }
 
         public ActionResult RegistroPaciente()
         {
             return View(paciente);
         }
 
-        // GET: RegistroPacienteController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: RegistroPacienteController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: RegistroPacienteController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> RegistrarPaciente(Paciente paciente)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync($"{_apiUrl}PacienteAPI/", paciente);
+            response.EnsureSuccessStatusCode();
+            string responseBody = await response.Content.ReadAsStringAsync();
+            Inyeccion inyeccion = new();
+            inyeccion.Id_paciente = paciente.Identificacion;
+            return View("..\\Inyecciones\\Inyecciones", inyeccion);
         }
 
-        // GET: RegistroPacienteController/Edit/5
-        public ActionResult Edit(int id)
+        [HttpGet]
+        public async Task<IActionResult> GetRegistroPaciente(string id)
         {
-            return View();
+            var response = await _httpClient.GetAsync($"{_apiUrl}PacienteAPI/{id}");
+            response.EnsureSuccessStatusCode();
+            var responseBody = await response.Content.ReadAsStringAsync();
+            var paciente = JsonConvert.DeserializeObject<Paciente>(responseBody);
+            return Ok(paciente);
         }
 
-        // POST: RegistroPacienteController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: RegistroPacienteController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: RegistroPacienteController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

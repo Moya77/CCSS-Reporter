@@ -1,0 +1,128 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model SintomasPaciente
+    <h1>Reporte de Sintomas</h1>
+
+    <section class="paper">
+
+        @using (Html.BeginForm("RegistrarSintomasPaciente", "Sintomas", FormMethod.Post, new { id = "FormProfesional" }))
+        {
+            <section style="visibility:hidden">
+                <input type="text" name="Id_paciente1" value="@Model.Id_paciente1">
+            </section>
+
+            <h2>Síntomas (marque todo lo que corresponda):</h2>
+            <section class="mb-3 mt-3">
+                <input type="radio" id="VisitaOconsulta" class="form-check-input" required name="MotivoConsulta1" onchange="FillForm()" value="Visita al médico o a la consulta de otro profesional de la salud">
+                <label for="VisitaOconsulta"  class="form-check-label labelSintomas">Visita al médico o a la consulta de otro profesional de la salud</label>
+
+                <input type="radio" id="VisitaUrgente" class="form-check-input" required name="MotivoConsulta1" onchange="FillForm()" value="Visita a la sala de emergencias o al centro de atención urgente">
+                <label for="VisitaUrgente"  class="form-check-label labelSintomas">Visita a la sala de emergencias o al centro de atención urgente</label>
+
+
+                <input type="radio" id="Hospitaliza" class="form-check-input" required name="MotivoConsulta1" onchange="FillForm()" value="Hospitalización">
+                <label for="Hospitaliza"  class="form-check-label labelSintomas">Hospitalización</label>
+                
+
+            </section>
+
+            <section class="mb-3 mt-3">
+                <input type="radio" id="prolongada" class="form-check-input" required name="MotivoConsulta1" onchange="FillForm()" value="Hospitalización prolongada">
+                <label for="prolongada"  class="form-check-label labelSintomas">Hospitalización prolongada</label>
+
+                <input type="radio" id="Enfermedad" class="form-check-input" required name="MotivoConsulta1" onchange="FillForm()" value="Enfermedad que pone en peligro la vida">
+                <label for="Enfermedad" class="form-check-label labelSintomas">Enfermedad que pone en peligro la vida</label>
+
+                <input type="radio" id="Incapacidad" class="form-check-input" required name="MotivoConsulta1" onchange="FillForm()" value="Incapacidad o daño permanente">
+                <label for="Incapacidad" class="form-check-label labelSintomas">Incapacidad o daño permanente</label>
+
+                <input type="radio" id="fallecido" class="form-check-input" required name="MotivoConsulta1" onchange="FillForm()" value="Paciente fallecido">
+                <label for="fallecido" class="form-check-label labelSintomas">Paciente fallecido</label>
+                
+            </section>
+
+            <section class="mb-3 mt-3">
+
+
+                <input type="radio" id="defecto" class="form-check-input" required name="MotivoConsulta1" onchange="FillForm()" value="Anomalía congénita o defecto de nacimiento">
+                <label for="defecto" class="form-check-label labelSintomas">Anomalía congénita o defecto de nacimiento</label>
+
+                <input type="radio" id="Aborto" class="form-check-input" required name="MotivoConsulta1" onchange="FillForm()" value="Aborto espontáneo o nacimiento sin vida">
+                <label for="Aborto" class="form-check-label labelSintomas">Aborto espontáneo o nacimiento sin vida</label>
+
+                <input type="radio" id="Ninguna" class="form-check-input" required name="MotivoConsulta1" onchange="FillForm()" value="Ninguna de las anteriores">
+                <label for="Ninguna" class="form-check-label labelSintomas">Ninguna de las anteriores</label>
+
+            </section>
+
+            <h3>¿Qué síntomas presenta?</h3>
+            <section class="mb-3">
+                <section class="mb-3">
+                    <label for="OtherSintom" class="form-label">Indique los sintomas</label>
+                    <input type="text" id="OtherSintom" required class="form-control" name="Sintomas1" onkeyup="FillForm(), checkBox()" onchange="FillForm()" value="@Model.Sintomas1">
+                </section>
+            </section>
+
+            <h3>¿Alergias conocidas?</h3>
+            <section class="mb-3 mt-3">
+
+                @foreach (var alergia in Model.Alergias1)
+                {
+                    <input type="checkbox" id="@alergia" class="form-check-input, checkbox" name="AlergiasSeleccionadas" onchange="FillForm()" value="@alergia">
+                    <label for="@alergia" id="label-@alergia" class="form-check-label labelSintomas">@alergia</label>
+                }
+      
+            </section>
+
+            <h2>Nuevas enfermedades presentadas en un lapso de cinco años o menos (marque todas las que correspondan):</h2>
+
+            <section id="firstSection" class="mb-3 mt-3">
+
+
+                @foreach (var enfermedad in Model.Enfermedades1)
+                {
+                   
+                    <input type="checkbox" id="@enfermedad" class="form-check-input" name="EnfermedadesSeleccionadas" onchange="FillForm()" value="@enfermedad">
+                    <label for="@enfermedad" class="form-check-label labelSintomas checkbox">@enfermedad</label>
+                }
+
+            </section>
+
+            <h2>Especifique otras condiciones</h2>
+            <section class="mb-3">
+                <section class="mb-3">
+                    <input type="text" id="OtrasCondiciones" required class="form-control" name="OtrasCondiciones1" onkeyup="FillForm()" onchange="FillForm()" value="@Model.OtrasCondiciones1">
+                </section>
+            </section>
+
+            <h2>¿Si ha desarrollado un nuevo cáncer o la reaparición de un cáncer existente, especifique el tipo de cáncer?</h2>
+            <section class="mb-3">
+                <section class="mb-3">
+                    <input type="text" id="OtrasCondiciones" required class="form-control" name="ReapacicionOnuevoCancer1" onkeyup="FillForm()" onchange="FillForm()" value="@Model.ReapacicionOnuevoCancer1">
+                </section>
+            </section>
+
+            <h2>¿Ha tenido alguno de los siguientes síntomas?</h2>
+
+            <section class="mb-3 mt-3">
+
+
+                @foreach (var sintoma in Model.OtrosSintomas1)
+                {
+                    <input type="checkbox" id="@sintoma" class="form-check-input" name="OtrosSintomasSeleccionadas" onchange="FillForm()" value="@sintoma">
+                    <label for="@sintoma" class="form-check-label labelSintomas checkbox">@sintoma</label>
+
+                }
+
+            </section>
+
+
+
+            <input type="submit" onclick="validForm(), checkBox()" class="btn btn-primary" id="btnSave" value="Registrar">
+
+        }
+
+    </section>
+}

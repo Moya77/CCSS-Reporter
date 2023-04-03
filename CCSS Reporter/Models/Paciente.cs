@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace CCSS_Reporter.Models
+﻿namespace CCSS_Reporter.Models
 {
     public class Paciente
     {

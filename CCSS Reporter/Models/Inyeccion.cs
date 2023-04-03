@@ -1,12 +1,19 @@
-﻿using System.Diagnostics.Contracts;
-
-namespace CCSS_Reporter.Models
+﻿namespace CCSS_Reporter.Models
 {
     public class Inyeccion
     {
-        ¿Tiene la vacuna de Sarampión/ rubeola/ parotiditis?
-ii. ¿Tiene la vacuna del Tétano/Hepatitis A o B/ Influenza?
-iii. ¿Tiene la vacuna del Covid y cuántas dosis tiene?
-iv. ¿En caso de no tener vacuna del Covid, debe poder digitar la razón del paciente de NO inyectarse contra Covid?
+        string id_paciente = "";
+        bool VacunaSaramRubParoti = false;
+        bool VacunaTetHepAoBInfl = false;
+        int CantCovid = 0;
+        string CovidComent = "";
+
+        public Inyeccion() { }
+
+        public bool VacunaSaramRubParoti1 { get => VacunaSaramRubParoti; set => VacunaSaramRubParoti = value; }
+        public bool VacunaTetHepAoBInfl1 { get => VacunaTetHepAoBInfl; set => VacunaTetHepAoBInfl = value; }
+        public int CantCovid1 { get => CantCovid; set => CantCovid = value; }
+        public string CovidComent1 { get => CovidComent; set => CovidComent = value; }
+        public string Id_paciente { get => id_paciente; set => id_paciente = value; }
     }
 }

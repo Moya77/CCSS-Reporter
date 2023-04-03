@@ -1,6 +1,7 @@
 ﻿using CCSS_Reporter.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
+using Newtonsoft.Json;
 
 namespace CCSS_Reporter.Controllers
 {
@@ -8,86 +9,60 @@ namespace CCSS_Reporter.Controllers
     {
         // GET: RegistroProfesionalController
         Profesional profesional = new Profesional();
+        private readonly HttpClient _httpClient;
+        private readonly string _apiUrl;
+        private readonly IMemoryCache _memoryCache;
+
+
+        public RegistroProfesionalController(HttpClient httpClient, IConfiguration configuration,
+                                             IMemoryCache memoryCache)
+        {
+            _httpClient = httpClient;
+            _apiUrl = configuration.GetValue<string>("APIUrl");
+            _memoryCache = memoryCache;
+        }
+
+
         public ActionResult RegistroProfesional()
         {
             return View(profesional);
         }
 
-        // GET: RegistroProfesionalController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: RegistroProfesionalController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
         [HttpPost]
-
-        public ActionResult RegistrarProfesional(Profesional profesional)
+        public async Task<IActionResult> RegistrarProfesional(Profesional profesional)
         {
 
-            return View("..\\RegistroClinica\\RegistroClinica",new Clinica());
+            profesional.NumeroRegistro1 = "";
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync($"{_apiUrl}ProfesionalAPI/", profesional);
+            response.EnsureSuccessStatusCode();
+            var responseBody = await response.Content.ReadAsStringAsync();
+
+            if (responseBody.Length > 0)
+            {
+                profesional.NumeroRegistro1 = responseBody.ToString();
+                HttpResponseMessage responseMail = await _httpClient.PostAsJsonAsync($"{_apiUrl}EmailService/SendEmail/", profesional);
+                responseMail.EnsureSuccessStatusCode();
+
+            }
+            var cacheEntryOptions = new MemoryCacheEntryOptions
+            {
+                Priority = CacheItemPriority.NeverRemove
+            };
+
+            _memoryCache.Set("ProfesionalObject", profesional, cacheEntryOptions);
+
+            return View("..\\RegistroClinica\\RegistroClinica", new Clinica());
         }
 
-        // POST: RegistroProfesionalController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        [HttpGet]
+        public async Task<IActionResult> GetRegistroProfesional(string id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var response = await _httpClient.GetAsync($"{_apiUrl}ProfesionalAPI/{id}");
+            response.EnsureSuccessStatusCode();
+            var responseBody = await response.Content.ReadAsStringAsync();
+            var profesional = JsonConvert.DeserializeObject<Profesional>(responseBody);
+            return Ok(profesional);
         }
 
-        // GET: RegistroProfesionalController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: RegistroProfesionalController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: RegistroProfesionalController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: RegistroProfesionalController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

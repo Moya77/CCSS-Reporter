@@ -1,10 +1,6 @@
 ﻿using CCSS_Reporter.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Net.Http;
-using System.Text;
-using System.Xml.Linq;
 
 namespace CCSS_Reporter.Controllers
 {
@@ -28,12 +24,28 @@ namespace CCSS_Reporter.Controllers
         [HttpPost]
         public async Task<IActionResult> RegistrarClinica(Clinica clinica)
         {
-           
-            HttpResponseMessage response = await _httpClient.PostAsJsonAsync($"{_apiUrl}RegistroClinicaAPI/", clinica);
+
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync($"{_apiUrl}ClinicaAPI/", clinica);
             response.EnsureSuccessStatusCode();
             string responseBody = await response.Content.ReadAsStringAsync();
-            // parse JSON response
-            return View(clinica);
+            return View("..\\RegistroPaciente\\RegistroPaciente", new Paciente());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SaltRegistro(string reason)
+        {
+
+            return Json(new { url = Url.Action("RegistroPaciente", "RegistroPaciente") });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetRegistroClinica(string id)
+        {
+            var response = await _httpClient.GetAsync($"{_apiUrl}ClinicaAPI/{id}");
+            response.EnsureSuccessStatusCode();
+            var responseBody = await response.Content.ReadAsStringAsync();
+            var clinica = JsonConvert.DeserializeObject<Clinica>(responseBody);
+            return Ok(clinica);
         }
 
 

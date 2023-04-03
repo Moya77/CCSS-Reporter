@@ -1,9 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace CCSS_Reporter.Models
+﻿namespace CCSS_Reporter.Models
 {
     public class Profesional
     {
+        private string NumeroRegistro;
         private string Identificacion;
         private string CodigoProfesional;
         private string NombreCompleto;
@@ -13,7 +12,7 @@ namespace CCSS_Reporter.Models
         private string Provincia;
 
         public Profesional() { }
-        public Profesional(string identificacion, string codigoProfesional, string nombreCompleto, string correo, string pais, string estado, string provincia)
+        public Profesional(string identificacion, string codigoProfesional, string nombreCompleto, string correo, string pais, string estado, string provincia, string numeroRegistro)
         {
             Identificacion = identificacion;
             CodigoProfesional = codigoProfesional;
@@ -22,6 +21,7 @@ namespace CCSS_Reporter.Models
             Pais = pais;
             Estado = estado;
             Provincia = provincia;
+            NumeroRegistro1 = numeroRegistro;
         }
 
         public string Identificacion1 { get => Identificacion; set => Identificacion = value; }
@@ -31,5 +31,6 @@ namespace CCSS_Reporter.Models
         public string Pais1 { get => Pais; set => Pais = value; }
         public string Estado1 { get => Estado; set => Estado = value; }
         public string Provincia1 { get => Provincia; set => Provincia = value; }
+        public string NumeroRegistro1 { get => NumeroRegistro; set => NumeroRegistro = value; }
     }
 }

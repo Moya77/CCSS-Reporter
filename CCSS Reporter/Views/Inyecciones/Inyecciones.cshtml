@@ -2,5 +2,57 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    <h1>Hola</h1>
+    @model Inyeccion
+    <h1>Reporte de vacunacion</h1>
+
+    <section class="paper">
+
+        @using (Html.BeginForm("RegistrarInyeccion", "Inyecciones", FormMethod.Post, new { id = "FormProfesional" }))
+        {
+            <section style="visibility:hidden">
+                <input type="text" name="Id_paciente" value="@Model.Id_paciente">
+            </section>
+
+            <section class="mb-3 mt-3">
+                <input type="checkbox" id="VacunaSaramRubParoti1" class="form-check-input, checkbox" name="VacunaSaramRubParoti1" onclick="FillForm(), inyeccionCheck()" value="">
+                <label for="VacunaSaramRubParoti1" class="form-check-label, checkbox">¿Tiene la vacuna de Sarampión/ rubeola/ parotiditis?</label>
+                
+
+            </section>
+
+            <section class="mb-3">
+                <input type="checkbox" id="VacunaTetHepAoBInfl1" class="form-check-input, checkbox" name="VacunaTetHepAoBInfl1" onclick="FillForm(),inyeccionCheck()" value="@Model.VacunaTetHepAoBInfl1">
+                <label for="VacunaTetHepAoBInfl1" class="form-check-label, checkbox">¿Tiene la vacuna del Tétano/Hepatitis A o B/ Influenza?</label>
+               
+            </section>
+
+            <h3>¿Tiene la vacuna del COVID?</h3>
+            <section class="mb-3">
+                <input type="radio" id="YES" required class="form-check-input, checkbox" name="decide" onchange="EnableDisableCovidData()">
+                <label for="YES" class="form-check-label">Sí</label>
+                <input type="radio" id="NO" required class="form-check-input, checkbox" name="decide" onchange="EnableDisableCovidData()">
+                <label for="NO" class="form-check-label">NO</label>
+            </section>
+
+
+            <section id="subSectCovid1" class="HideSectCovid">
+
+            <section class="mb-3">
+                <label for="CantCovid1" class="form-label">¿cuántas dosis tiene?</label>
+                <input type="number" min="0" id="CantCovid1" class="form-control" name="CantCovid1" onkeyup="FillForm()" onchange="FillForm()" value="@Model.CantCovid1">
+            </section>
+
+            </section>
+            <section id="subSectCovid2" class="HideSectCovid">
+            <section class="mb-3">
+                <label for="CovidComent1" class="form-label">¿Porque decidió NO inyectarse contra Covid?</label>
+                <input type="text" id="CovidComent1" onkeyup="FillForm()" onchange="FillForm()" class="form-control" name="CovidComent1" value="@Model.CovidComent1" placeholder="Ingrese el motivo indicado">
+            </section>
+            </section>
+
+            <input type="submit" onclick="validForm()" class="btn btn-primary"  id="btnSave" value="Guardar">
+                
+       }
+
+    </section>
 }

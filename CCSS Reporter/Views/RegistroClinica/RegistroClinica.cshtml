@@ -7,13 +7,13 @@
 @{
     @model Clinica
 
-    <section class="center-block">
+    <section class="center-block paper">
 
         @using (Html.BeginForm("RegistrarClinica", "RegistroClinica", FormMethod.Post, new { id = "FormProfesional" }))
         {
             <section class="mb-3 mt-3">
                 <label for="CedulaJuridica" class="form-label">Cedula juridica</label>
-                <input type="text" id="CedulaJuridica" class="form-control" required name="CedulaJuridica1" onkeyup="FillForm()" onchange="FillForm()" value="@Model.CedulaJuridica1" placeholder="Ingrese la cedula juridica de la clinica">
+                <input type="text" id="CedulaJuridica" class="form-control" onfocusout="buscarClinica()" required name="CedulaJuridica1" onkeyup="FillForm()" onchange="FillForm()" value="@Model.CedulaJuridica1" placeholder="Ingrese la cedula juridica de la clinica">
 
             </section>
 
@@ -53,7 +53,8 @@
             </section>
 
             <input type="submit" onclick="validForm()" class="btn btn-primary" disabled="true" id="btnSave" value="Guardar">
-            <input type="button" class="btn btn-primary" id="btnSave" value="Saltar">
+
+            <input type="button" class="btn btn-primary" onclick="SaltarRegistro()" id="btnSave" value="Saltar">
 
 
         }

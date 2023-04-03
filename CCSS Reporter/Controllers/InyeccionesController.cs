@@ -1,83 +1,41 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using CCSS_Reporter.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CCSS_Reporter.Controllers
 {
     public class InyeccionesController : Controller
     {
-        // GET: InyeccionesController
-        public ActionResult Index()
+        private readonly HttpClient _httpClient;
+        private readonly string _apiUrl;
+
+        public InyeccionesController(HttpClient httpClient, IConfiguration configuration)
         {
-            return View();
+
+            _httpClient = httpClient;
+            _apiUrl = configuration.GetValue<string>("APIUrl");
         }
 
-        // GET: InyeccionesController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Inyecciones()
         {
-            return View();
+            return View(new Inyeccion());
         }
 
-        // GET: InyeccionesController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
-        // POST: InyeccionesController/Create
+
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> RegistrarInyeccion(Inyeccion inyeccion)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync($"{_apiUrl}InyeccionAPI/", inyeccion);
+            response.EnsureSuccessStatusCode();
+            string responseBody = await response.Content.ReadAsStringAsync();
+            SintomasPaciente sintomas = new();
+            sintomas.Id_paciente1 = inyeccion.Id_paciente;
+            return View("..\\Sintomas\\Sintomas", sintomas);
         }
 
-        // GET: InyeccionesController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
 
-        // POST: InyeccionesController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: InyeccionesController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: InyeccionesController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

@@ -36,3 +36,66 @@ body {
     width: 50%;
    align-items:self-end;
 }
+
+.HideSectCovid{
+    visibility:hidden;
+}
+
+.ShowSectCovid {
+    visibility: visible;
+}
+
+.labelChecked {
+    font-size: 16px;
+    border-radius: 3px;
+    padding: 10px;
+    background-color: green;
+}
+
+.labelSintomas{
+    font-size: 16px;
+    border-radius: 3px;
+    padding:10px;
+    background-color:white;
+}
+
+.checkbox{
+    margin-top: 10px;
+    font-size: 16px;
+    border-radius: 3px;
+    padding: 10px;
+    background-color: white;
+}
+
+
+input[type="checkbox"], input[type="radio"] {
+    opacity: 0%;
+    
+}
+    input[type="radio"]:checked + label {
+        background-color: green;
+        color: white;
+    }
+
+    input[type="checkbox"]:checked + label {
+        background-color: green;
+        color: white;
+    }
+
+.logocss{
+    width:100px;
+    height:100px;
+}
+
+#firstSection{
+    justify-content:center;
+}
+
+#mainNavbar{
+}
+
+.paper{
+   padding:20px;
+  box-shadow:2px 2px 2px 2px;
+  background-color:aliceblue;
+}

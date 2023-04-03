@@ -1,7 +1,6 @@
 ﻿using CCSS_Reporter.Models;
 using NLog;
 using System.Data.SqlClient;
-using System.Linq.Expressions;
 
 namespace CCSS_Reporter.DB
 {
@@ -24,29 +23,32 @@ namespace CCSS_Reporter.DB
 
         public void RegistrarClinica(Clinica clinica)
         {
-            try { 
-            using (SqlConnection cn = new SqlConnection(config.GetConnectionString("Conexion")))
+            try
             {
-                cn.Open();
-                using (SqlCommand cmd = new SqlCommand("RegClinica", cn))
+                using (SqlConnection cn = new SqlConnection(config.GetConnectionString("Conexion")))
                 {
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@NombreClinica", clinica.NombreClinica1);
-                    cmd.Parameters.AddWithValue("@CedulaJuridica", clinica.CedulaJuridica1);
-                    cmd.Parameters.AddWithValue("@pais", clinica.Pais);
-                    cmd.Parameters.AddWithValue("@provinciaEstado", clinica.ProvinciaEstado);
-                    cmd.Parameters.AddWithValue("@distrito", clinica.Distrito);
-                    cmd.Parameters.AddWithValue("@Telefono", clinica.Telefono1);
-                    cmd.Parameters.AddWithValue("@correo", clinica.Correo);
-                    cmd.Parameters.AddWithValue("@direccionWeb", clinica.DireccionWeb);
-                    cmd.ExecuteNonQuery();
-                }
+                    cn.Open();
+                    using (SqlCommand cmd = new SqlCommand("RegClinica", cn))
+                    {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@NombreClinica", clinica.NombreClinica1);
+                        cmd.Parameters.AddWithValue("@CedulaJuridica", clinica.CedulaJuridica1);
+                        cmd.Parameters.AddWithValue("@pais", clinica.Pais);
+                        cmd.Parameters.AddWithValue("@provinciaEstado", clinica.ProvinciaEstado);
+                        cmd.Parameters.AddWithValue("@distrito", clinica.Distrito);
+                        cmd.Parameters.AddWithValue("@Telefono", clinica.Telefono1);
+                        cmd.Parameters.AddWithValue("@correo", clinica.Correo);
+                        cmd.Parameters.AddWithValue("@direccionWeb", clinica.DireccionWeb);
+                        cmd.ExecuteNonQuery();
+                    }
                 }
 
-                }catch (Exception ex){
+            }
+            catch (Exception ex)
+            {
                 Logger.Error(ex);
-                 }
             }
         }
     }
+}
 
